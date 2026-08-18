@@ -19,13 +19,18 @@ router = APIRouter()
 # RESUME STORAGE
 # =====================================================
 
-UPLOAD_FOLDER = "resumes"
+# =====================================================
+# RESUME STORAGE
+# =====================================================
+
+# Vercel has a read-only filesystem.
+# /tmp is the writable directory available during execution.
+UPLOAD_FOLDER = "/tmp/resumes"
 
 os.makedirs(
     UPLOAD_FOLDER,
     exist_ok=True
 )
-
 
 # =====================================================
 # RESUME ANALYSIS
