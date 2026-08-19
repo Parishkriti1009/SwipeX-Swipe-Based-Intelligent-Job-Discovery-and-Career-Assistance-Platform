@@ -1,66 +1,30 @@
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+from dotenv import load_dotenv
+import os
 
-
-# =====================================================
-# DATABASE CONFIGURATION
-# =====================================================
+# Load environment variables
+load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
+# Create database engine
+engine = create_engine(DATABASE_URL)
 
-# Local development fallback
-if not DATABASE_URL:
-    DATABASE_URL = (
-        "postgresql://postgres@localhost:5432/jobmatch_ai"
-    )
-
-
-# Render / PostgreSQL compatibility
-if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace(
-        "postgres://",
-        "postgresql://",
-        1
-    )
-
-
-# =====================================================
-# SQLALCHEMY
-# =====================================================
-
-engine = create_engine(
-    DATABASE_URL
-)
-
-
+# Create session
 SessionLocal = sessionmaker(
     autocommit=False,
     autoflush=False,
     bind=engine
 )
 
-
+# Base class for all models
 Base = declarative_base()
 
-
-# =====================================================
-# DATABASE SESSION
-# =====================================================
-
+# Dependency to get DB session
 def get_db():
-
     db = SessionLocal()
-
     try:
-
         yield db
-
     finally:
-
         db.close()

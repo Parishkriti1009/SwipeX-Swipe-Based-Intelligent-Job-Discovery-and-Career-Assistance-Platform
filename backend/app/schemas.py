@@ -1,147 +1,171 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
+from datetime import datetime
+from typing import Optional
 
-class UserCreate(BaseModel):
+# =====================================
+# AUTH SCHEMAS (Milestone 1)
+# =====================================
+
+class UserRegister(BaseModel):
     name: str
-    email: str
-    password: str
-    role: str
-
-class UserLogin(BaseModel):
-    email: str
-    password: str
-
-from pydantic import BaseModel
-
-class UserCreate(BaseModel):
-    name: str
-    email: str
+    email: EmailStr
     password: str
     role: str
 
 
-class UserLogin(BaseModel):
-    email: str
+class UserResponse(BaseModel):
+    id: int
+    name: str
+    email: EmailStr
+    role: str
+
+    class Config:
+        from_attributes = True
+
+
+class LoginUser(BaseModel):
+    email: EmailStr
     password: str
 
 
-# -------------------------
-# Job Schemas
-# -------------------------
+# =====================================
+# COMPANY SCHEMAS
+# =====================================
+
+class CompanyCreate(BaseModel):
+    name: str
+    industry: Optional[str] = None
+    website: Optional[str] = None
+    logo_url: Optional[str] = None
+    is_startup: bool = False
+    is_mnc: bool = False
+
+class CompanyResponse(CompanyCreate):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+
+# =====================================
+# JOB SCHEMAS
+# =====================================
 
 class JobCreate(BaseModel):
     title: str
-    company: str
+    description: str
     location: str
     salary: str
     experience: str
     job_type: str
-    category: str
     skills: str
+    company_id: int
+    work_mode: str
+
+
+class JobResponse(BaseModel):
+    id: int
+
+    title: str
     description: str
-    logo: str
+    location: str
+    salary: str
+    experience: str
+    job_type: str
+    skills: str
+    work_mode: str
 
+    posted_date: datetime
 
-class JobResponse(JobCreate):
-    id: int
+    company: CompanyResponse
 
     class Config:
         from_attributes = True
 
 
-# -------------------------
-# Milestone 4 Schemas
-# -------------------------
+# =====================================
+# SWIPE SCHEMAS
+# =====================================
 
-from datetime import datetime
-from typing import Optional, List
+# =====================================
+# SWIPE SCHEMAS
+# =====================================
 
-
-class ApplicationCreate(BaseModel):
+class SwipeRequest(BaseModel):
     job_id: int
-    match_percentage: Optional[int] = 0
+    action: str
 
 
-class ApplicationStatusUpdate(BaseModel):
-    status: str  # applied | shortlisted | rejected | selected
-
-
-class ApplicationResponse(BaseModel):
+class SwipeResponse(BaseModel):
     id: int
-    job_id: int
     user_id: int
-    status: str
-    match_percentage: int
-    applied_at: datetime
-
-    # convenience fields joined in from the related Job / User
-    job_title: Optional[str] = None
-    company: Optional[str] = None
-    location: Optional[str] = None
-    salary: Optional[str] = None
-    skills: Optional[str] = None
-    candidate_name: Optional[str] = None
-    candidate_email: Optional[str] = None
+    job_id: int
+    action: str
+    timestamp: datetime
 
     class Config:
         from_attributes = True
 
 
-class SavedJobCreate(BaseModel):
+# =====================================
+# SAVED JOB SCHEMAS
+# =====================================
+
+class SaveJobRequest(BaseModel):
     job_id: int
 
 
 class SavedJobResponse(BaseModel):
     id: int
+    user_id: int
     job_id: int
     saved_at: datetime
 
     class Config:
         from_attributes = True
 
+class ApplicationCreate(BaseModel):
+    job_id: int
+
+
+class ApplicationStatusUpdate(BaseModel):
+    status: str
+
+
+class ApplicationResponse(BaseModel):
+    id: int
+    user_id: int
+    job_id: int
+
+    company_name: str
+    job_title: str
+    location: str | None = None
+    salary: str | None = None
+
+    status: str
+    applied_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+# =====================================
+# NOTIFICATION SCHEMAS (Milestone 4)
+# =====================================
 
 class NotificationResponse(BaseModel):
     id: int
-    type: str
+    user_id: int
+    job_id: Optional[int] = None
+
+    notification_type: str
     title: str
     message: str
-    job_id: Optional[int] = None
+
+    match_score: Optional[int] = None
+
     is_read: bool
     created_at: datetime
-
-    class Config:
-        from_attributes = True
-
-
-class ResumeScoreEntry(BaseModel):
-    ats_score: int
-    created_at: datetime
-
-    class Config:
-        from_attributes = True
-
-class CandidateProfileResponse(BaseModel):
-
-    id: int
-    name: str
-    email: str
-    role: str
-
-    resume_text: Optional[str] = None
-
-    application_id: int
-    job_id: int
-    status: str
-    match_percentage: int
-    applied_at: datetime
-
-    job_title: Optional[str] = None
-    company: Optional[str] = None
-    location: Optional[str] = None
-    salary: Optional[str] = None
-    experience: Optional[str] = None
-    job_type: Optional[str] = None
-    category: Optional[str] = None
-    skills: Optional[str] = None
 
     class Config:
         from_attributes = True
