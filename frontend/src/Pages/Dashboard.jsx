@@ -49,7 +49,7 @@ useEffect(() => {
 
       // Hiring visualisation
       const visualizationResponse = await fetch(
-        "http://127.0.0.1:8000/dashboard/hiring-visualisation",
+        "https://swipex-backend-pwin.onrender.com/dashboard/hiring-visualisation",
         {
           headers,
         }
@@ -120,7 +120,7 @@ useEffect(() => {
       const token = localStorage.getItem("token");
 
 const response = await fetch(
-  "http://127.0.0.1:8000/dashboard/jobseeker",
+  "https://swipex-backend-pwin.onrender.com/dashboard/jobseeker",
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -171,7 +171,7 @@ if (!loggedInUser.id) {
 }
 
 const response = await fetch(
-  `http://127.0.0.1:8000/notifications/${loggedInUser.id}`,
+  `https://swipex-backend-pwin.onrender.com/notifications/${loggedInUser.id}`,
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -229,7 +229,7 @@ useEffect(() => {
       }
 
       const response = await fetch(
-        `http://127.0.0.1:8000/dashboard/resume-performance/${loggedInUser.id}`,
+        `https://swipex-backend-pwin.onrender.com/dashboard/resume-performance/${loggedInUser.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -183,7 +183,7 @@ export default function Register() {
   try {
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/register",
+      "https://swipex-backend-pwin.onrender.com/register",
       {
         name: fullName,
         email: email,

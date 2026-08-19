@@ -42,7 +42,7 @@ const loadApplicants = async () => {
     }
 
     const response = await fetch(
-      "http://127.0.0.1:8000/applications/",
+      "https://swipex-backend-pwin.onrender.com/applications/",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -198,7 +198,7 @@ useEffect(() => {
     }
 
     const response = await fetch(
-      `http://127.0.0.1:8000/applications/${id}`,
+      `https://swipex-backend-pwin.onrender.com/applications/${id}`,
       {
         method: "PUT",
         headers: {

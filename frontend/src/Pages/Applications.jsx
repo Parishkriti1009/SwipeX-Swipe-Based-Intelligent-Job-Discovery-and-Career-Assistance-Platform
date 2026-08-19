@@ -50,7 +50,7 @@ if (!token) {
 }
 
 const res = await axios.get(
-  "http://localhost:8000/applications/my",
+  "https://swipex-backend-pwin.onrender.com/applications/my",
   {
     headers: {
       Authorization: `Bearer ${token}`,

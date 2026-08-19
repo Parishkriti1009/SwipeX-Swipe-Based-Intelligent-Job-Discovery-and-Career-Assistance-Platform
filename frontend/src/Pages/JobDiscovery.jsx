@@ -77,7 +77,7 @@ const fileInputRef = useRef(null);
 
 
 const response = await axios.get(
-  "http://127.0.0.1:8000/recommendations/",
+  "https://swipex-backend-pwin.onrender.com/recommendations/",
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -151,7 +151,7 @@ const fetchFilteredJobs = async (params = {}) => {
 
   try {
     const response = await axios.get(
-      "http://localhost:8000/jobs/search",
+      "https://swipex-backend-pwin.onrender.com/jobs/search",
       {
         params: params,
       }
@@ -205,7 +205,7 @@ const fetchCompatibility = async (jobId) => {
   try {
 
     const response = await axios.post(
-      "http://localhost:8000/jobs/match",
+      "https://swipex-backend-pwin.onrender.com/jobs/match",
       {
         job_id: jobId,
       },
@@ -247,7 +247,7 @@ const fetchCompatibility = async (jobId) => {
 
   try {
     await axios.post(
-  "http://localhost:8000/swipe/",
+  "https://swipex-backend-pwin.onrender.com/swipe/",
   {
     job_id: currentJob.id,
     action: direction === "right" ? "LIKE" : "SKIP",
@@ -330,7 +330,7 @@ const applyJob = async (jobId) => {
     console.log("Applying for job:", jobId);
 
     const response = await axios.post(
-      "http://localhost:8000/applications/apply",
+      "https://swipex-backend-pwin.onrender.com/applications/apply",
       {
         job_id: jobId,
       },
@@ -386,7 +386,7 @@ const uploadResumeForMatch = async (e) => {
 
         const response = await axios.post(
 
-            `http://localhost:8000/resume/match/${selectedJobId}`,
+            `https://swipex-backend-pwin.onrender.com/resume/match/${selectedJobId}`,
 
             formData,
 

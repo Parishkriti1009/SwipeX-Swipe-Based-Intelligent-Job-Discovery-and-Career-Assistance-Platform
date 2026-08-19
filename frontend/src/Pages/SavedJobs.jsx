@@ -184,7 +184,7 @@ if (!token) {
 }
 
 const res = await axios.get(
-  "http://localhost:8000/saved-jobs/",
+  "https://swipex-backend-pwin.onrender.com/saved-jobs/",
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -271,7 +271,7 @@ useEffect(() => {
     }
 
     await axios.post(
-      "http://localhost:8000/applications/apply",
+      "https://swipex-backend-pwin.onrender.com/applications/apply",
       {
         job_id: job.job_id
       },
@@ -302,7 +302,7 @@ useEffect(() => {
     const token = localStorage.getItem("token");
 
 await axios.delete(
-  `http://localhost:8000/saved-jobs/${job.id}`,
+  `https://swipex-backend-pwin.onrender.com/saved-jobs/${job.id}`,
   {
     headers: {
       Authorization: `Bearer ${token}`,

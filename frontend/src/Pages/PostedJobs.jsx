@@ -61,7 +61,7 @@ const [jobsError, setJobsError] = useState("");
 
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://127.0.0.1:8000/jobs/companies", {
+      const response = await fetch("https://swipex-backend-pwin.onrender.com/jobs/companies", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -102,7 +102,7 @@ const [jobsError, setJobsError] = useState("");
         throw new Error("Please select a company.");
       }
 
-      const response = await fetch("http://127.0.0.1:8000/jobs/", {
+      const response = await fetch("https://swipex-backend-pwin.onrender.com/jobs/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -217,7 +217,7 @@ const loadJobs = async () => {
       throw new Error("You are not logged in.");
     }
 
-    const response = await fetch("http://127.0.0.1:8000/jobs/", {
+    const response = await fetch("https://swipex-backend-pwin.onrender.com/jobs/", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

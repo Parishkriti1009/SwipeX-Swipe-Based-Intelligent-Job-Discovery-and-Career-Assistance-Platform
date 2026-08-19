@@ -94,7 +94,7 @@ atsData?.ats_breakdown || [];
         console.log("Sending resume with token:", token);
 
         const response = await axios.post(
-            "http://localhost:8000/resume/upload",
+            "https://swipex-backend-pwin.onrender.com/resume/upload",
             formData,
             {
                 headers: {
